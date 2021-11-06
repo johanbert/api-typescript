@@ -1,0 +1,63 @@
+<!-- <h1>ESTOS ESTUDIANTES!!!!</h1>
+<h2>DISQUE BRILLANTES</h2>
+<h3>NI INTERVIENEN, SOLO CUANDO LES NACE</h3> -->
+
+<!-- {{respuesta | json}} -->
+
+<section>
+    <div class="container">
+        <div class="row  justify-content-center">
+            <div class="col-5">
+                <form name="formRegister">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input [(ngModel)]="formUser.nombre" name='abc' type="text" class="form-control" />
+                                <label class="form-label" for="nombre">Nombre Completo</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input [(ngModel)]="formUser.edad" type="number" name="edad" class="form-control" />
+                                <label class="form-label" for="edad">Edad</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input [(ngModel)]="formUser.fecha" type="date" name="fecha" class="form-control" />
+                        <label class="form-label" for="fecha">Fecha</label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="button" class="btn btn-primary btn-block mb-4" (click)="createUser()">Registrar usuario</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div *ngIf="users" class="row row-cols-1 row-cols-md-3 g-4">
+            <div *ngFor='let user of users;' class="col">
+                <div class="card h-100">
+                    <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg" class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h5 class="card-title">{{user.nombre}} - {{user.edad}}</h5>
+                        <p class="card-text">
+                            This card has supporting text below as a natural lead-in to additional content.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">{{user.fecha}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->

@@ -1,4 +1,5 @@
 import uuidv1 from "uuid";
+import moment from "moment";
 import {Request, Response} from "express";
 import mongoose, { model, Types } from 'mongoose';
 import mongoConnect from "../../../common/services/mongodb";
@@ -10,7 +11,12 @@ const User = model<userI>('users', userModel);
 export const getUsers = async(req:Request, res: Response) => {
     try {
         await mongoConnect()
-        const users = await User.find();
+        let users:any = await User.find();
+        users = users.map( (user:any)=>{
+            user.fecha = moment(user.fecha).startOf('day').fromNow();
+            return user
+        })
+        
         res.status(200).json(users)
     } catch (error) {
         return res.status(500).json({ message: error })

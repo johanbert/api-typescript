@@ -32,6 +32,27 @@ const drawGet = async() => {
     }
 }
 
+const saveUser = async() => {
+    const { nombre, edad, fecha } = document.formRegister
+    if (!nombre.value || !edad.value || !fecha.value)
+        return alert('ERROR: CAMPOS VACIOS, CORRIJA')
 
-getApi()
+    const formData = new FormData(document.formRegister);
+    const response = await fetch(API_URL, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nombre: nombre.value,
+            edad: edad.value,
+            fecha: fecha.value
+        }),
+        method: "post"
+    })
+    alert(JSON.stringify(response))
+    console.log(response);
+    document.formRegister.reset()
+}
+
+// getApi()
 drawGet()
