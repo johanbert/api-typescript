@@ -23,6 +23,25 @@ export const getUsers = async(req:Request, res: Response) => {
     }
 }
 
+export const getUser = async(req:Request, res: Response) => {
+    try {
+        await mongoConnect()
+        const { id } = req.params;
+        const filter = { _id: new mongoose.Types.ObjectId(id) };
+
+        let doc:any = await User.findById(id)
+        doc.fecha = moment(doc.fecha).format('YYYY-MM-DD');
+
+        if (!doc)
+            return res.status(404).json({ message: `_id ${req.params.id} doesn't exists` })
+
+        res.status(200).json(doc)
+
+    } catch (error) {
+        return res.status(500).json({ message: error })
+    }
+}
+
 export const addUser = async(req:Request, res: Response) => {
     try {
         await mongoConnect()
@@ -43,8 +62,9 @@ export const editAll = async(req:Request, res: Response) => {
         const filter = { _id: new mongoose.Types.ObjectId(req.params.id) };
         const update = body;
 
+        console.log('body:',body);
         const doc = await User.findOneAndUpdate(filter, update, { new: true });
-
+        console.log('doc:',doc);
         if (!doc)
             return res.status(404).json({ message: `_id ${req.params.id} doesn't exists` })
 
