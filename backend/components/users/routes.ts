@@ -1,17 +1,17 @@
 import express, { Router } from "express";
-import { getUsers, addUser, editAll, editSomeone, remove, getUser } from "./controllers";
+import { listUsersHandler,getUserHandler, addUserHandler, editUserAllPropsHandler, editUserSomePropsHandler, removeUserHandler } from "./controllers";
 import { middlewareValidateId, middlewareValidateModel } from "./middlewares"
 const router = Router()
 
 router.route('/users')
-    .get(getUsers)
-    .post(addUser)
+    .get(listUsersHandler)
+    .post(addUserHandler)
 
 router.route('/users/:id')
     .all([middlewareValidateId, middlewareValidateModel])
-    .get(getUser)
-    .put(editAll)
-    .patch(editSomeone)
-    .delete(remove)
+    .get(getUserHandler)
+    .put(editUserAllPropsHandler)
+    .patch(editUserSomePropsHandler)
+    .delete(removeUserHandler)
 
 export default router

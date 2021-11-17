@@ -7,7 +7,7 @@ import { userI } from "../types/user.types";
 export const middlewareValidateId = async(req: Request, res:Response, next:NextFunction) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))
-            return res.status(404).json({ message: `MIDDLEWARE: invalid Format _id ${req.params.id}` })
+            return res.status(403).json({ message: `MIDDLEWARE: invalid Format _id ${req.params.id}` })
         next()
     } catch (error) {
         return res.status(500).json({ message: error })
@@ -22,7 +22,7 @@ export const middlewareValidateModel = async(req:Request, res:Response, next:Nex
         // Validamos si tiene todas las propiedades del modelo userModel y hacemos reasignacion
         for (const key in body) {
             if (!userModel.obj.hasOwnProperty(key)) {
-                return res.status(404).json({ message: `MIDDLEWARE: Your body properties doesn't allowed` })
+                return res.status(403).json({ message: `MIDDLEWARE: Your body properties doesn't allowed` })
             }
             newBody[key] = body[key]
         }
